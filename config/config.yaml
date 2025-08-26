@@ -1,0 +1,44 @@
+---
+llm_config:
+  client:
+    name: "BEDROCK" # Options: BEDROCK, GEMINI, OPENAI, SLIP, HORIZON_HUB, HORIZON_API
+    openai:
+      model_name: "gpt-4o"
+      model_params:
+        max_output_tokens: 4000
+        temperature: 0.1
+        top_p: 1.0
+    bedrock:
+      model_name: "anthropic.claude-3-5-sonnet-20240620-v1:0"
+      model_family: "anthropic"
+      model_region: "us-east-1"  # TODO: get this form env
+      model_params:
+        max_gen_len: 2000
+        temperature: 0.01
+    gemini:
+      model_name: "gemini-2.0-flash"
+      model_params:
+        max_output_tokens: 2000
+        temperature: 1.0
+        top_k: 3
+        top_p: 0.95
+  # Prompt size validation and protection
+  prompt_validation:
+    enabled: true  # Enable automatic prompt size validation and truncation
+    intelligent_truncation: true  # Use intelligent truncation that preserves prompt structure
+    fallback_to_simple: true  # Fallback to simple truncation if intelligent fails
+    custom_token_limits: {}  # Override default token limits: {"model_name": limit}
+  # Prompt cleaning and normalization
+  prompt_cleaning:
+    enabled: true  # Enable prompt cleaning and normalization
+    remove_backslashes: true  # Remove literal backslash characters
+    collapse_whitespace: true  # Collapse multiple whitespaces into single spaces
+    preserve_newlines: true  # Whether to preserve newlines during whitespace collapse
+  # Rate limiting configuration for batch processing
+  rate_limiting:
+    enabled: true
+    requests_per_minute: 60  # Adjust based on your API tier
+    requests_per_second: 10  # Maximum concurrent requests
+    batch_size: 5  # Number of requests to process in parallel
+    retry_attempts: 3  # Number of retry attempts for failed requests
+    retry_delay: 1.0  # Delay between retries in seconds
