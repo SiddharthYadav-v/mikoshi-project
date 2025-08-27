@@ -1,7 +1,7 @@
 ---
 llm_config:
   client:
-    name: "BEDROCK" # Options: BEDROCK, GEMINI, OPENAI, SLIP, HORIZON_HUB, HORIZON_API
+    name: "OPENAI" # Options: BEDROCK, GEMINI, OPENAI
     openai:
       model_name: "gpt-4o"
       model_params:
@@ -11,7 +11,7 @@ llm_config:
     bedrock:
       model_name: "anthropic.claude-3-5-sonnet-20240620-v1:0"
       model_family: "anthropic"
-      model_region: "us-east-1"  # TODO: get this form env
+      model_region: "us-east-1"
       model_params:
         max_gen_len: 2000
         temperature: 0.01
